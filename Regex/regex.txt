@@ -1,0 +1,54 @@
+Operador Descrição
+^ Início da linha
+$ Fim da linha
+. Curinga que representa um caractere
++ O dígito anterior deve aparecer uma vez ou mais
+[] Lista de caracteres (cas com qualquer um deles)
+[^] Lista de caracteres negada
+| Operador "ou"
+.* Curing para qualquer coisa
+* O dígito anterior pode aparecer em qualquer quantidade
+{,} O dígito anterior deve aparecer na quantidade indicada
+
+Ex: 
+
+Filtrar tudo que começa com a letra "m"
+$ cat /etc/passwd | grep "^m" 
+   ou pode usar direto (é mais rápido)
+$ grep "^m" /etc/passwd
+
+Filtrar tudo que termina com determinado caractere
+$grep "h$" /etc/passwd
+
+Filtrar tudo que começa com r e termina com h
+leia-se tudo que começa com "r" (^r) tenha qualquer coisa no meio(.*) e termine com h(h$)
+$grep "^r.*h$" /etc/passwd
+
+Filtrar o que começa com "m" e o segundo digito seja "a"
+$grep "^m[a]" /etc/passwd
+
+Filtrar o que começa com "m" e o segundo digito seja "a" ou "e"
+$grep "^m[ae]" /etc/passwd
+
+Filtrar o que começa com "m" e o segundo digito NÃO seja "a" 
+$grep "^m[^a]" /etc/passwd
+
+Filtrat tudo que comece com qualquer coisa mas o segundo digito seja 'a'
+$grep "^.[a]" /etc/passwd
+
+vai combinando conforme a necessidade do filtro que vc quer... 
+-------------------------------------------------------------------------
+
+Expressoes regulares extendidas, não usar grep e sim egrep
+
+Filtrar linhas com 50 digitos
+leia-se começa com qqr coisa "^." tem 50 digitos ou mais ({50,}), termina com qqr coisa ($)
+aplicação:
+$egrep "^.{50,}$" /etc/passwd
+
+de 50 á 60:
+$egrep "^.{50,60}$" /etc/passwd
+
+Operador Or 
+Ex: filtrar Matheus ou root
+$egrep "mateus|root" /etc/passwd
